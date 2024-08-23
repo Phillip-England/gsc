@@ -13,8 +13,8 @@ func homePage() string {
 	code, _ := ffh.ExtractFuncByName(fileTxt, "HTMLDoc")
 	return HTMLDoc(
 		Head(CSSLink("/static/output.css")),
-		Navbar("gsc", "go simple components"),
-		Root(
+		Navbar("gsc", "go simple components", ""),
+		MainElement(
 			H1("HTMLDoc"),
 			P("outputs the shell of an html document"),
 			CodeBlock("go", code),
