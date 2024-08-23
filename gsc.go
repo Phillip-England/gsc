@@ -25,7 +25,7 @@ func HTMLDoc(meta string, content ...string) string {
 		<!DOCTYPE>
 		<html>
 			<head>%s</head>
-			<body>%s</body>
+			<body class='select-none'>%s</body>
 		</html>
 	`, meta, output)
 }
@@ -111,12 +111,19 @@ func Navbar(title string, subtext string) string {
 	`, title, subtext)
 }
 
+func Root(content ...string) string {
+	contentStr := strings.Join(content, "\n")
+	return fmt.Sprintf( /*html*/ `
+		<div id="root" class='p-4 flex flex-col gap-4'>
+			%s
+		</div>
+	`, contentStr)
+}
+
 func Article(content ...string) string {
 	contentStr := strings.Join(content, "\n")
 	return fmt.Sprintf( /*html*/ `
-		<article class='p-4 flex flex-col gap-4'>
-			%s
-		</article>
+	
 	`, contentStr)
 }
 
@@ -125,5 +132,13 @@ func P(text string) string {
 }
 
 func H1(text string) string {
-	return fmt.Sprintf(`<h1 class="text-lg font-bold">%s</h1>`, text)
+	return fmt.Sprintf(`<h1 class="text-2xl font-bold">%s</h1>`, text)
+}
+
+func H2(text string) string {
+	return fmt.Sprintf(`<h2 class="text-xl font-bold">%s</h2>`, text)
+}
+
+func H3(text string) string {
+	return fmt.Sprintf(`<h3 class="text-lg font-bold">%s</h3>`, text)
 }
