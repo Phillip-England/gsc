@@ -1,8 +1,8 @@
 # gsc
 
-go simple components 💥
+go simple components
 
-keeping components in go as simple as possible
+Keeping components in go as simple as possible 🤷‍♂️
 
 ## Useful Skeletons
 
