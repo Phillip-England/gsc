@@ -50,7 +50,6 @@ func CodeBlock(language string, content string) string {
 	lines := []string{}
 	for _, line := range strings.Split(content, "\n") {
 		if line != "" {
-			fmt.Println(line)
 			lines = append(lines, line)
 		}
 	}
@@ -85,7 +84,6 @@ func CodeBlock(language string, content string) string {
 			let block = document.querySelector("#%s")
 			let copyBtn = block.querySelector('#copy-btn')
 			let copyIndicator = block.querySelector('#copy-indicator')
-			console.log(copyBtn, copyIndicator)
 			let lines = block.textContent.split("\n")
 			let newLines = []
 			for (let i = 0; i < lines.length; i++) {
