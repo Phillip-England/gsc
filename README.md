@@ -19,3 +19,8 @@ func SimpleComponent(word string) string {
     `, word)
 }
 ```
+
+usage
+```go
+fmt.Println(SimpleComponent("i dont wanna taco bout it 🌮"))
+```
