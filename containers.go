@@ -19,6 +19,10 @@ func HTMLDoc(head string, content ...string) string {
 	`, head, output)
 }
 
+func Body(attr string, content string) string {
+	return fmt.Sprintf( /*html*/ `<body %s>%s</body>`, attr, content)
+}
+
 func Head(title string, content ...string) string {
 	output := ""
 	for _, str := range content {
@@ -43,4 +47,8 @@ func Article(content ...string) string {
 			%s
 		</article>
 	`, contentStr)
+}
+
+func TwoColumnGrid() string {
+
 }

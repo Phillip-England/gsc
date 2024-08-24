@@ -13,10 +13,8 @@ go simple component, keeping things.. simple ⚡
 
 a simple component
 ```go
-func SimpleComponent(word string) string {
-    return fmt.Sprinf(`
-        <p>the word is: %s</p>
-    `, word)
+func _(content string) string {
+	return fmt.Sprintf( /*html*/ `<p>%s</p>`, content)
 }
 ```
 
