@@ -9,15 +9,29 @@ import (
 )
 
 func homePage() string {
-	fileTxt, _ := ffh.ReadFile("./gsc.go")
+	fileTxt, _ := ffh.ReadFile("./containers.go")
 	code, _ := ffh.ExtractFuncByName(fileTxt, "HTMLDoc")
 	return HTMLDoc(
-		Head(CSSLink("/static/output.css")),
-		Navbar("gsc", "go simple components", ""),
+		Head("go simple components",
+			CSSLink("/static/output.css"),
+			Meta(`name="viewport" content="width=device-width, initial-scale=1.0"`),
+		),
+		Navbar("gsc", "go simple components", Navmenu(
+			NavItem("Home", "/"),
+			NavItem("About", "/about"),
+		)),
 		MainElement(
-			H1("HTMLDoc"),
-			P("outputs the shell of an html document"),
-			CodeBlock("go", code),
+			H1("Navigation"),
+			Article(
+				H3("HTMLDoc"),
+				P("outputs the shell of an html document"),
+				CodeBlock("go", "gsc.go", code),
+			),
+			Article(
+				H3("MainElement"),
+				P("a flex container which can wrap the main content for a good content-based layout"),
+				CodeBlock("go", "gsc.go", code),
+			),
 		),
 	)
 }

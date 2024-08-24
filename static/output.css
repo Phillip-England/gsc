@@ -554,6 +554,56 @@ video {
   --tw-contain-style:  ;
 }
 
+.container {
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .container {
+    max-width: 480px;
+  }
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1920px;
+  }
+}
+
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
@@ -562,32 +612,32 @@ video {
   position: relative;
 }
 
-.right-2 {
-  right: 0.5rem;
-}
-
 .left-0 {
   left: 0px;
+}
+
+.left-6 {
+  left: 1.5rem;
+}
+
+.right-0 {
+  right: 0px;
 }
 
 .top-0 {
   top: 0px;
 }
 
-.z-30 {
-  z-index: 30;
-}
-
-.z-40 {
-  z-index: 40;
-}
-
-.z-50 {
-  z-index: 50;
+.top-\[90px\] {
+  top: 90px;
 }
 
 .z-20 {
   z-index: 20;
+}
+
+.z-30 {
+  z-index: 30;
 }
 
 .block {
@@ -610,8 +660,16 @@ video {
   height: 2rem;
 }
 
+.h-\[90px\] {
+  height: 90px;
+}
+
 .h-full {
   height: 100%;
+}
+
+.w-4\/5 {
+  width: 80%;
 }
 
 .w-6 {
@@ -626,16 +684,14 @@ video {
   width: 100%;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .select-none {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
-}
-
-.select-text {
-  -webkit-user-select: text;
-     -moz-user-select: text;
-          user-select: text;
 }
 
 .flex-row {
@@ -654,12 +710,20 @@ video {
   justify-content: space-between;
 }
 
-.gap-4 {
-  gap: 1rem;
+.gap-12 {
+  gap: 3rem;
 }
 
 .gap-2 {
   gap: 0.5rem;
+}
+
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.border {
+  border-width: 1px;
 }
 
 .border-b {
@@ -682,6 +746,18 @@ video {
 
 .p-4 {
   padding: 1rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+
+.pr-4 {
+  padding-right: 1rem;
 }
 
 .text-2xl {
@@ -708,22 +784,16 @@ video {
   font-weight: 700;
 }
 
-.text-gray-800 {
+.text-white {
   --tw-text-opacity: 1;
-  color: rgb(31 41 55 / var(--tw-text-opacity));
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .opacity-50 {
   opacity: 0.5;
 }
 
-.\[i2\:line\.length\] {
-  i2: line.length;
-}
-
-@media (prefers-color-scheme: dark) {
-  .dark\:text-white {
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-  }
+.hover\:bg-gray-100:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
