@@ -1,16 +1,21 @@
 # gsc
 
-go simple components
+go simple component, keeping things.. simple ⚡
 
-Keeping components in go as simple as possible 🤷‍♂️
+## Philosophy
 
-## Useful Skeletons
+1. components are functions (which resolve to strings)
+2. tailwind is used for styling
+3. components contain and expose their own javascript
 
-### Component (don't forget to name your component)
+
+## Examples
+
+a simple component
 ```go
-func _(name string) string {
-	return fmt.Sprintf( /*html*/ `
-		<h1>Hello, %s!</h1>
-	`, name)
+func SimpleComponent(word string) string {
+    return fmt.Sprinf(`
+        <p>the word is: %s</p>
+    `, word)
 }
 ```
