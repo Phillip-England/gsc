@@ -4,7 +4,7 @@ go simple component, keeping things.. simple ⚡
 
 ## Philosophy
 
-1. components are functions (which resolve to strings)
+1. components are functions (which return strings)
 2. tailwind is used for styling
 3. components contain and expose their own javascript
 
