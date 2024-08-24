@@ -13,12 +13,19 @@ go simple component, keeping things.. simple ⚡
 
 a simple component
 ```go
-func _(content string) string {
+func P(content string) string {
 	return fmt.Sprintf( /*html*/ `<p>%s</p>`, content)
 }
 ```
 
 usage
 ```go
-fmt.Println(SimpleComponent("i dont wanna taco bout it 🌮"))
+package main
+
+import "fmt"
+
+func main() {
+    p := P("i dont wanna taco bout it 🌮")
+    fmt.Println(p)
+}
 ```
