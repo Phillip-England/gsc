@@ -11,14 +11,8 @@ import (
 	"github.com/yuin/goldmark/renderer/html"
 )
 
-func CodeBlock(language string, filepathMarker string, content string) string {
-	lines := []string{}
-	for _, line := range strings.Split(content, "\n") {
-		if line != "" {
-			lines = append(lines, line)
-		}
-	}
-	content = strings.Join(lines, "\n")
+func CodeBlock(language string, filepathMarker string, contentStrings ...string) string {
+	content := strings.Join(contentStrings, "\n")
 	content = fmt.Sprintf("\n```%s\n%s\n```", language, content)
 	markdown2 := goldmark.New(
 		goldmark.WithExtensions(
@@ -49,6 +43,7 @@ func CodeBlock(language string, filepathMarker string, content string) string {
 	copyIndicator := `<div id='copy-indicator' class='hidden flex items-center absolute right-0'><svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M9 2a1 1 0 0 0-1 1H6a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2a1 1 0 0 0-1-1H9Zm1 2h4v2h1a1 1 0 1 1 0 2H9a1 1 0 0 1 0-2h1V4Zm5.707 8.707a1 1 0 0 0-1.414-1.414L11 14.586l-1.293-1.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4Z" clip-rule="evenodd"/></svg></div>`
 	copyBtn := `<div id='copy-btn' class='flex items-center cursor-pointer absolute right-0'><svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M18 3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1V9a4 4 0 0 0-4-4h-3a1.99 1.99 0 0 0-1 .267V5a2 2 0 0 1 2-2h7Z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M8 7.054V11H4.2a2 2 0 0 1 .281-.432l2.46-2.87A2 2 0 0 1 8 7.054ZM10 7v4a2 2 0 0 1-2 2H4v6a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3Z" clip-rule="evenodd"/></svg></div>`
 	title = strings.Replace(title, "<code>", `<div class='flex flex-row items-center gap-2 p-6 relative'>`+filenameHTML+copyIndicator+copyBtn+`</div><code>`, 1)
+	title = strings.ReplaceAll(title, "<code", "<code class='whitespace-pre-wrap'")
 
 	title = title + fmt.Sprintf( /*html*/ `
 		<script>
@@ -72,9 +67,9 @@ func CodeBlock(language string, filepathMarker string, content string) string {
 				}
 				let htmlData = newLines.join("\n")
 				let firstTenChars = htmlData.slice(0, 10)
-				let parts = firstTenChars.split(" ")
+				let parts = firstTenChars.split(".")
 				let firstPart = parts[0]
-				let secondPartFirstChar = parts[1][0]
+				let secondPartFirstChar = parts[1][%d]
 				let isNum = parseInt(secondPartFirstChar, 10)
 				if (firstPart && Number.isInteger(isNum)) {
 					htmlData = htmlData.slice(htmlData.indexOf(secondPartFirstChar)+1, htmlData.length)
@@ -91,6 +86,6 @@ func CodeBlock(language string, filepathMarker string, content string) string {
 			})()
 			
 		</script>
-	`, randStr)
+	`, randStr, len(language))
 	return title
 }

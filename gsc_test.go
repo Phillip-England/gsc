@@ -8,6 +8,10 @@ import (
 )
 
 func handler() string {
+	md, err := Markdown("./docs/home.md")
+	if err != nil {
+		panic(err)
+	}
 	return HTMLDoc(
 		Head("", "go simple components",
 			CSSLink("/static/output.css"),
@@ -23,9 +27,7 @@ func handler() string {
 					A(`href='/contact' class='p-4 w-full hover:bg-light-gray' active-link='bg-light-gray'`, "Contact"),
 				)),
 				Main(`class='p-8 md:py-12 md:px-32'`,
-					Article(`class='flex flex-col gap-2'`,
-						TitleAndText("Keep it Simple", "Stop overthinking web development. HTML, CSS, and Javascript. That's it."),
-					),
+					Article(`class='flex flex-col gap-12'`, md),
 				),
 			),
 			ScriptActiveLink(),
