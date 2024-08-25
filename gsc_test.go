@@ -41,7 +41,17 @@ func Test_Gsc(t *testing.T) {
 	mdPaths := []string{}
 	funcNames := []string{}
 
-	err := filepath.Walk(".", func(path string, info fs.FileInfo, err error) error {
+	err := os.RemoveAll("./docs")
+	if err != nil {
+		panic(err)
+	}
+
+	err = os.Mkdir("./docs", 0755)
+	if err != nil {
+		panic(err)
+	}
+
+	err = filepath.Walk(".", func(path string, info fs.FileInfo, err error) error {
 		if strings.Contains(path, ".go") && !strings.Contains(path, "_test") {
 			parts := strings.Split(path, ".")
 			funcName := parts[0]
