@@ -4,48 +4,33 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/Phillip-England/ffh"
 	"github.com/Phillip-England/vbf"
 )
 
-func homePage() string {
-	fileTxt, _ := ffh.ReadFile("./containers.go")
-	code, _ := ffh.ExtractFuncByName(fileTxt, "HTMLDoc")
+func handler() string {
+	bulkLinks := ""
+	for i := 0; i < 10; i++ {
+		bulkLinks = bulkLinks + "<a href='/'>home</a>"
+	}
 	return HTMLDoc(
-		Head("go simple components",
+		Head("", "go simple components",
 			CSSLink("/static/output.css"),
 			Meta(`name="viewport" content="width=device-width, initial-scale=1.0"`),
 		),
-		Navbar("gsc", "go simple components", Navmenu(
-			NavItem("Home", "/"),
-			NavItem("About", "/about"),
-		)),
-		MainElement(
-			H1("Navigation"),
-			Article(
-				H3("HTMLDoc"),
-				P("outputs the shell of an html document"),
-				CodeBlock("go", "gsc.go", code),
-			),
-			Article(
-				H3("MainElement"),
-				P("a flex container which can wrap the main content for a good content-based layout"),
-				CodeBlock("go", "gsc.go", code),
-			),
+		Body("",
+			GridOneCol("main-grid", "gsc", "go simple components", bulkLinks, "<p class='h-[3000px]'>yooo</p>"),
 		),
 	)
 }
 
-func Test_VBF(t *testing.T) {
+func Test_Gsc(t *testing.T) {
 
 	mux, gCtx := vbf.VeryBestFramework()
 
 	vbf.AddRoute("GET /", mux, gCtx, func(w http.ResponseWriter, r *http.Request) {
-		vbf.WriteHTML(w, homePage())
+		vbf.WriteHTML(w, handler())
 	}, vbf.MwLogger)
 
-	err := vbf.Serve(mux, "8080")
-	if err != nil {
-		panic(err)
-	}
+	_ = vbf.Serve(mux, "8080")
+
 }
