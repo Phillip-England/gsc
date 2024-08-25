@@ -1,16 +1,4 @@
-package gsc
-
-import (
-	"bytes"
-	"fmt"
-	"strings"
-
-	chromahtml "github.com/alecthomas/chroma/v2/formatters/html"
-	"github.com/yuin/goldmark"
-	highlighting "github.com/yuin/goldmark-highlighting/v2"
-	"github.com/yuin/goldmark/renderer/html"
-)
-
+```go
 func CodeBlock(language string, filepathMarker string, contentStrings ...string) string {
 	content := strings.Join(contentStrings, "\n")
 	content = fmt.Sprintf("\n```%s\n%s\n```", language, content)
@@ -89,3 +77,4 @@ func CodeBlock(language string, filepathMarker string, contentStrings ...string)
 	`, randStr, len(language))
 	return title
 }
+```
