@@ -9,3 +9,6 @@ all: build
 tw:
 	tailwindcss -i $(TAILWIND_INPUT) -o $(TAILWIND_OUTPUT) --watch
 
+test:
+	tailwindcss -i $(TAILWIND_INPUT) -o $(TAILWIND_OUTPUT); go test
+

@@ -2,6 +2,6 @@ package gsc
 
 import "fmt"
 
-func Script(text string) string {
-	return fmt.Sprintf( /*html*/ `<script>%s</script>`, text)
+func Script(attr string, text string) string {
+	return fmt.Sprintf( /*html*/ `<script %s>%s</script>`, attr, text)
 }

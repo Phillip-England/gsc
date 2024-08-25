@@ -8,17 +8,27 @@ import (
 )
 
 func handler() string {
-	bulkLinks := ""
-	for i := 0; i < 10; i++ {
-		bulkLinks = bulkLinks + "<a href='/'>home</a>"
-	}
 	return HTMLDoc(
 		Head("", "go simple components",
 			CSSLink("/static/output.css"),
 			Meta(`name="viewport" content="width=device-width, initial-scale=1.0"`),
 		),
 		Body("",
-			GridOneCol("main-grid", "gsc", "go simple components", bulkLinks, "<p class='h-[3000px]'>yooo</p>"),
+			LayoutSideMenu("main-grid", "gsc", "go simple components",
+				Ul(`class='p-2 flex flex-col gap-2 border-r h-full'`, Map(func(item string) string {
+					return Li(`class='flex text-sm border rounded'`, item)
+				},
+					A(`href='/' class='p-4 w-full hover:bg-light-gray' active-link='bg-light-gray'`, "Home"),
+					A(`href='/about' class='p-4 w-full hover:bg-light-gray' active-link='bg-light-gray'`, "About"),
+					A(`href='/contact' class='p-4 w-full hover:bg-light-gray' active-link='bg-light-gray'`, "Contact"),
+				)),
+				Main(`class='p-8 md:py-12 md:px-32'`,
+					Article(`class='flex flex-col gap-2'`,
+						TitleAndText("Keep it Simple", "Stop overthinking web development. HTML, CSS, and Javascript. That's it."),
+					),
+				),
+			),
+			ScriptActiveLink(),
 		),
 	)
 }
