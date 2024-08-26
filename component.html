@@ -1,0 +1,106 @@
+
+<!-- basic component -->
+
+<go name="Header">
+    <header>
+        <h1>{{ title string }}</h1>
+        <p>{{ subtext string }}</p>
+    </header>
+</go>
+
+<output>
+    func Header(title string, subtext string) string {
+        return `
+            <header>
+                <h1>`+ title +`</h1>
+                <p>`+ subtext +`</p>
+            </header>
+        `
+    }
+</output>
+
+
+<!-- component with a slot -->
+
+<go name="Doc">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ title string }}</title>
+    </head>
+    <body>
+        <slot name="content"></slot>
+    </body>
+    </html>
+</go>
+
+<output>
+    func Doc(title string, content ...string) string {
+        output := strings.Join(content, "\n")
+        return `
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>`+title+`</title>
+            </head>
+            <body>
+                `+output+`
+            </body>
+            </html>
+        `
+    }
+</output>
+
+
+<!-- component that utilizes other components -->
+
+<go name="Home">
+    <Doc title="go simple components">
+        <Header title="gsc" subtext="go simple components"></Header>
+    </Doc>
+</go>
+
+<output>
+    func Home() string {
+        return Doc("go simple components", Header("gsc", "go simple components"))
+    }
+</output>
+
+<!-- component that utilizes an if/else statement -->
+
+<go name="Greeting">
+    {{ if loggedIn }}
+        <p>Hello, Captin!</p>
+    {{ else }}
+        <p>Hello, Guest!</p>
+    {{ end }}
+</go>
+
+<output>
+    func Greeting(loggedIn bool) string {
+        if loggedIn {
+            return `<p>Hello, Captin!</p>`
+        } else {
+            <p>Hello, Guest!</p>
+        }
+    }
+</output>
+
+<!-- component that utilizes a loop -->
+
+<go name="Menu">
+    {{ for _, i := range items string[] }}
+        <p>{{ i }}</p>
+    {{ end }}
+</go>
+
+<output>
+    func Menu(items []string) {
+        loopOutput := strings.Join(items, "\n")
+        return loopOutput
+    }
+</output>
