@@ -9,28 +9,28 @@ import (
 // COMPONENTS
 //========================================
 
-func CSSLink(path string) string {
-	return fmt.Sprintf(`<link rel="stylesheet" href="%s">`, path)
+func Link(attr string) string {
+	return fmt.Sprintf(`<link %s />`, attr)
 }
 
 func Meta(content string) string {
 	return fmt.Sprintf(`<meta %s></meta>`, content)
 }
 
-func P(text string) string {
-	return fmt.Sprintf(`<p class="text-sm">%s</p>`, text)
+func P(attr string, text string) string {
+	return fmt.Sprintf(`<p %s>%s</p>`, attr, text)
 }
 
-func H1(text string) string {
-	return fmt.Sprintf(`<h1 class="text-2xl font-bold">%s</h1>`, text)
+func H1(attr string, text string) string {
+	return fmt.Sprintf(`<h1 %s>%s</h1>`, attr, text)
 }
 
-func H2(text string) string {
-	return fmt.Sprintf(`<h2 class="text-xl font-bold">%s</h2>`, text)
+func H2(attr string, text string) string {
+	return fmt.Sprintf(`<h2 %s>%s</h2>`, attr, text)
 }
 
-func H3(text string) string {
-	return fmt.Sprintf(`<h3 class="text-lg font-bold">%s</h3>`, text)
+func H3(attr string, text string) string {
+	return fmt.Sprintf(`<h3 %s>%s</h3>`, attr, text)
 }
 
 func A(attr string, content ...string) string {
@@ -42,9 +42,7 @@ func Head(attr string, title string, content ...string) string {
 }
 
 func HTMLDoc(content ...string) string {
-	return fmt.Sprintf(`
-		<!DOCTYPE><html>%s</html>
-	`, strings.Join(content, "\n"))
+	return fmt.Sprintf(`<!DOCTYPE><html>%s</html>`, strings.Join(content, "\n"))
 }
 
 func Div(attr string, content ...string) string {
@@ -60,11 +58,7 @@ func Li(attr string, content ...string) string {
 }
 
 func Main(attr string, content ...string) string {
-	return fmt.Sprintf(`
-		<main %s>
-			%s
-		</main>
-	`, attr, strings.Join(content, "\n"))
+	return fmt.Sprintf(`<main %s>%s</main>`, attr, strings.Join(content, "\n"))
 }
 
 func Nav(attr string, content ...string) string {
@@ -85,11 +79,7 @@ func Ul(attr string, items ...string) string {
 
 func Article(attr string, content ...string) string {
 	output := strings.Join(content, "\n")
-	return fmt.Sprintf(`
-		<article %s>
-			%s
-		</article>
-	`, attr, output)
+	return fmt.Sprintf(`<article %s>%s</article>`, attr, output)
 }
 
 func Body(attr string, content ...string) string {
@@ -110,6 +100,22 @@ func Attr(funcs ...func(string) string) string {
 
 func Class(className string) string {
 	return `class="` + className + `" `
+}
+
+func Src(s string) string {
+	return `src="` + s + `" `
+}
+
+func Rel(className string) string {
+	return `rel="` + className + `" `
+}
+
+func Href(s string) string {
+	return `href="` + s + `" `
+}
+
+func Name(s string) string {
+	return `name="` + s + `" `
 }
 
 //========================================
