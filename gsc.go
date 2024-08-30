@@ -39,6 +39,13 @@ func (c Component) In(components ...Component) Component {
 	return NewComponent(s)
 }
 
+func (c Component) Of(funcs ...func(component Component) Component) Component {
+	for _, fn := range funcs {
+		c = fn(c)
+	}
+	return c
+}
+
 func (c Component) Attr(attrName string, value string) Component {
 	strComponent := string(c)
 	rightBracketIndex := strings.Index(strComponent, ">")
@@ -46,11 +53,19 @@ func (c Component) Attr(attrName string, value string) Component {
 		return ""
 	}
 	if string(strComponent[rightBracketIndex-1]) == "/" {
-		c = NewComponent(strings.Replace(strComponent, "/>", ` `+attrName+`='`+value+`'/>`, 1))
+		c = NewComponent(strings.Replace(strComponent, "/>", ` `+attrName+`="`+value+`"/>`, 1))
 	} else {
-		c = NewComponent(strings.Replace(strComponent, ">", ` `+attrName+`='`+value+`'>`, 1))
+		c = NewComponent(strings.Replace(strComponent, ">", ` `+attrName+`="`+value+`">`, 1))
 	}
 	return c
+}
+
+func (c Component) AddClass(classNames ...string) Component {
+	str := c.ToString()
+	for _, name := range classNames {
+		str = strings.Replace(str, "class=\"", `class="`+name+` `, 1)
+	}
+	return NewComponent(str)
 }
 
 func (c Component) Class(className string) Component {
@@ -407,7 +422,7 @@ func Line() Component {
 func Map(f func(item string) Component, items ...string) Component {
 	output := ""
 	for _, item := range items {
-		output = output + string(f(item)) + "\n"
+		output = output + string(f(item))
 	}
 	return NewComponent(output)
 }
