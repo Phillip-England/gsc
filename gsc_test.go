@@ -5,29 +5,19 @@ import (
 	"testing"
 )
 
-func FlexCol(c Component) Component {
-	c = c.Class("flex flex-col")
-	return c
-}
-
-func TextSm(c Component) Component {
-	c = c.Class("text-sm")
-	return c
-}
-
-func BoldHeader(c Component) Component {
-	return c.Class("text-lg font-bold")
+func Layout() Component {
+	return HTMLDoc().In(
+		Head().In(
+			Meta().Name("viewport").Content("width=device-width, initial-scale=1.0"),
+			Link().Rel("stylesheet").Href("/static/css/output.css"),
+			Title().Text("Receipt Tracker"),
+		),
+		Body().In(
+			H1().Text("Hello, World!"),
+		),
+	)
 }
 
 func Test_G(t *testing.T) {
-	c := HTMLDoc().In(
-		Div().Of(FlexCol).In(
-			P().Of(TextSm),
-			H1().Of(BoldHeader),
-		),
-		Map(func(item string) Component {
-			return P().Text(item)
-		}, "apple", "orange", "banana"),
-	)
-	fmt.Println(c)
+	fmt.Println(Layout())
 }
