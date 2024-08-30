@@ -180,8 +180,8 @@ func (c Component) Width(s string) Component {
 	return c.Attr("width", fmt.Sprintf("%s", s))
 }
 
-func (c Component) Height(n int) Component {
-	return c.Attr("height", fmt.Sprintf("%d", n))
+func (c Component) Height(s string) Component {
+	return c.Attr("height", fmt.Sprintf("%s", s))
 }
 
 func (c Component) Data(key, value string) Component {
