@@ -124,6 +124,22 @@ func (c Component) ViewBox(s string) Component {
 	return c.Attr("viewBox", s)
 }
 
+func (c Component) D(s string) Component {
+	return c.Attr("d", s)
+}
+
+func (c Component) StrokeLinecap(s string) Component {
+	return c.Attr("stroke-linecap", s)
+}
+
+func (c Component) StrokeWidth(s string) Component {
+	return c.Attr("stroke-width", s)
+}
+
+func (c Component) Stroke(s string) Component {
+	return c.Attr("stroke", s)
+}
+
 func (c Component) Disabled() Component {
 	return c.Attr("disabled", "disabled")
 }
