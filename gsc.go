@@ -6,7 +6,7 @@ import (
 )
 
 //========================================
-//
+// Component Type
 //========================================
 
 type Component string
@@ -17,6 +17,10 @@ func NewComponent(s string, args ...string) Component {
 	} else {
 		return Component(strings.TrimSpace(s))
 	}
+}
+
+func (c Component) ToString() string {
+	return string(c)
 }
 
 func (c Component) Text(text string) Component {
@@ -85,6 +89,10 @@ func (c Component) Placeholder(s string) Component {
 	return c.Attr("placeholder", s)
 }
 
+func (c Component) Content(s string) Component {
+	return c.Attr("content", s)
+}
+
 func (c Component) Alt(s string) Component {
 	return c.Attr("alt", s)
 }
@@ -138,7 +146,7 @@ func (c Component) Data(key, value string) Component {
 }
 
 //========================================
-// COMPONENTS
+// Components
 //========================================
 
 func Link() Component {
@@ -393,7 +401,7 @@ func Line() Component {
 }
 
 //========================================
-// TEMPLATING FUNCTIONS
+// Templating Funcs
 //========================================
 
 func Map(f func(item string) Component, items ...string) Component {
