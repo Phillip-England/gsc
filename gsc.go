@@ -116,6 +116,14 @@ func (c Component) Title(s string) Component {
 	return c.Attr("title", s)
 }
 
+func (c Component) Fill(s string) Component {
+	return c.Attr("fill", s)
+}
+
+func (c Component) ViewBox(s string) Component {
+	return c.Attr("viewBox", s)
+}
+
 func (c Component) Disabled() Component {
 	return c.Attr("disabled", "disabled")
 }
@@ -158,6 +166,14 @@ func (c Component) Height(n int) Component {
 
 func (c Component) Data(key, value string) Component {
 	return c.Attr("data-"+key, value)
+}
+
+func (c Component) Aria(key, value string) Component {
+	return c.Attr("aria-"+key, value)
+}
+
+func (c Component) Xmlns(s string) Component {
+	return c.Attr("pattern", s)
 }
 
 //========================================
