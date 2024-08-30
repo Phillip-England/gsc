@@ -63,6 +63,10 @@ func (c Component) Attr(attrName string, value string) Component {
 func (c Component) AddClass(classNames ...string) Component {
 	str := c.ToString()
 	for _, name := range classNames {
+		if !strings.Contains(str, "class=") {
+			str = string(NewComponent(str).Class(name))
+			continue
+		}
 		str = strings.Replace(str, "class=\"", `class="`+name+` `, 1)
 	}
 	return NewComponent(str)
