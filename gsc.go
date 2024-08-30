@@ -128,12 +128,16 @@ func (c Component) D(s string) Component {
 	return c.Attr("d", s)
 }
 
-func (c Component) StrokeLinecap(s string) Component {
+func (c Component) StrokeLineCap(s string) Component {
 	return c.Attr("stroke-linecap", s)
 }
 
 func (c Component) StrokeWidth(s string) Component {
 	return c.Attr("stroke-width", s)
+}
+
+func (c Component) StrokeLineJoin(s string) Component {
+	return c.Attr("stroke-linejoin", s)
 }
 
 func (c Component) Stroke(s string) Component {
@@ -168,12 +172,12 @@ func (c Component) Pattern(s string) Component {
 	return c.Attr("pattern", s)
 }
 
-func (c Component) Step(n int) Component {
-	return c.Attr("step", fmt.Sprintf("%d", n))
+func (c Component) Step(s string) Component {
+	return c.Attr("step", fmt.Sprintf("%s", s))
 }
 
-func (c Component) Width(n int) Component {
-	return c.Attr("width", fmt.Sprintf("%d", n))
+func (c Component) Width(s string) Component {
+	return c.Attr("width", fmt.Sprintf("%s", s))
 }
 
 func (c Component) Height(n int) Component {
