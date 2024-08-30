@@ -90,10 +90,10 @@ func Body(attr string, content ...string) string {
 // ATTRIBUTES
 //========================================
 
-func Attr(funcs ...func(string) string) string {
+func Attr(funcs ...string) string {
 	output := ""
-	for _, fn := range funcs {
-		output = fn(output)
+	for _, str := range funcs {
+		output = output + str
 	}
 	return output
 }
