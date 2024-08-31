@@ -73,7 +73,12 @@ func (c Component) AddClass(classNames ...string) Component {
 }
 
 func (c Component) Class(className string) Component {
-	return c.Attr("class", className)
+	str := c.ToString()
+	if !strings.Contains(str, "class=") {
+		return c.Attr("class", className)
+	}
+	str = strings.Replace(str, "class=\"", `class="`+className+` `, 1)
+	return NewComponent(str)
 }
 
 func (c Component) Src(s string) Component {
