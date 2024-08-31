@@ -30,7 +30,15 @@ func Join(separator string, components ...Component) Component {
 }
 
 // If generates a Component based on a condition.
-func If(condition bool, trueComponent, falseComponent Component) Component {
+func If(condition bool, trueComponent Component) Component {
+	if condition {
+		return trueComponent
+	}
+	return NewComponent("")
+}
+
+// If generates a Component based on a condition with an else option.
+func IfElse(condition bool, trueComponent, falseComponent Component) Component {
 	if condition {
 		return trueComponent
 	}
