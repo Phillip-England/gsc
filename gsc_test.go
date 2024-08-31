@@ -19,5 +19,8 @@ func Layout() Component {
 }
 
 func Test_G(t *testing.T) {
-	fmt.Println(Layout())
+
+	c := P().TagName()
+	fmt.Println(c)
+
 }
