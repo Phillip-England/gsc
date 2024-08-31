@@ -147,3 +147,7 @@ func (c Component) Aria(key, value string) Component {
 func (c Component) Xmlns(s string) Component {
 	return c.Attr("pattern", s)
 }
+
+func (c Component) Rows(s string) Component {
+	return c.Attr("rows", s)
+}
