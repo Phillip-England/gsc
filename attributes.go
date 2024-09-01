@@ -125,15 +125,15 @@ func (c Component) Pattern(s string) Component {
 }
 
 func (c Component) Step(s string) Component {
-	return c.Attr("step", fmt.Sprintf("%s", s))
+	return c.Attr("step", s)
 }
 
 func (c Component) Width(s string) Component {
-	return c.Attr("width", fmt.Sprintf("%s", s))
+	return c.Attr("width", s)
 }
 
 func (c Component) Height(s string) Component {
-	return c.Attr("height", fmt.Sprintf("%s", s))
+	return c.Attr("height", s)
 }
 
 func (c Component) Data(key, value string) Component {

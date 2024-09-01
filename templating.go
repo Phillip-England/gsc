@@ -1,5 +1,24 @@
 package gsc
 
+import "strings"
+
+func (c Component) In(components ...Component) Component {
+	componentStr := ""
+	for _, component := range components {
+		componentStr = componentStr + string(component)
+	}
+	s := string(c)
+	rightAngleIndex := strings.Index(s, ">")
+	if rightAngleIndex == -1 {
+		return c
+	}
+	if s[rightAngleIndex-1] == '/' {
+		return c
+	}
+	s = s[:rightAngleIndex+1] + componentStr + s[rightAngleIndex+1:]
+	return NewComponent(s)
+}
+
 func Map(f func(item string) Component, items ...string) Component {
 	output := ""
 	for _, item := range items {
@@ -8,16 +27,6 @@ func Map(f func(item string) Component, items ...string) Component {
 	return NewComponent(output)
 }
 
-// Join concatenates multiple Components into a single Component with an optional separator.
-func Join(separator string, components ...Component) Component {
-	output := ""
-	for _, c := range components {
-		output = output + c.ToString()
-	}
-	return NewComponent(output)
-}
-
-// If generates a Component based on a condition.
 func If(condition bool, trueComponent Component) Component {
 	if condition {
 		return trueComponent
@@ -25,7 +34,6 @@ func If(condition bool, trueComponent Component) Component {
 	return NewComponent("")
 }
 
-// If generates a Component based on a condition with an else option.
 func IfElse(condition bool, trueComponent, falseComponent Component) Component {
 	if condition {
 		return trueComponent
@@ -33,54 +41,9 @@ func IfElse(condition bool, trueComponent, falseComponent Component) Component {
 	return falseComponent
 }
 
-// Each applies a function to each Component in a slice and concatenates the results.
-func Each(f func(item Component) Component, components ...Component) Component {
-	output := ""
-	for _, component := range components {
-		output = output + string(f(component)) + "\n"
-	}
-	return NewComponent(output)
-}
-
-// Filter returns a Component containing only the Components that satisfy a predicate function.
-func Filter(predicate func(item Component) bool, components ...Component) Component {
-	output := ""
-	for _, component := range components {
-		if predicate(component) {
-			output = output + string(component) + "\n"
-		}
-	}
-	return NewComponent(output)
-}
-
-// WithAttr creates a Component with an additional attribute added.
-func WithAttr(c Component, attrName, attrValue string) Component {
-	return c.Attr(attrName, attrValue)
-}
-
-// WithClass creates a Component with an additional class added.
-func WithClass(c Component, className string) Component {
-	return c.Class(className)
-}
-
-// ConditionalClass adds a class to a Component if a condition is true.
-func ConditionalClass(c Component, condition bool, className string) Component {
-	if condition {
-		return c.Class(className)
+func (c Component) Of(funcs ...func(component Component) Component) Component {
+	for _, fn := range funcs {
+		c = fn(c)
 	}
 	return c
-}
-
-// Wrap wraps a Component with another Component.
-func Wrap(wrapper, content Component) Component {
-	return wrapper.In(content)
-}
-
-// Merge merges the content of multiple Components into a single Component.
-func Merge(components ...Component) Component {
-	output := ""
-	for _, component := range components {
-		output = output + string(component) + "\n"
-	}
-	return NewComponent(output)
 }
