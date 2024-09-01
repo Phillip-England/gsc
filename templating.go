@@ -8,23 +8,11 @@ func Map(f func(item string) Component, items ...string) Component {
 	return NewComponent(output)
 }
 
-// Repeat generates a Component by repeating a given Component a specified number of times.
-func Repeat(c Component, count int) Component {
-	output := ""
-	for i := 0; i < count; i++ {
-		output = output + string(c) + "\n"
-	}
-	return NewComponent(output)
-}
-
 // Join concatenates multiple Components into a single Component with an optional separator.
 func Join(separator string, components ...Component) Component {
 	output := ""
-	for i, component := range components {
-		output = output + string(component)
-		if i < len(components)-1 {
-			output = output + separator
-		}
+	for _, c := range components {
+		output = output + c.ToString()
 	}
 	return NewComponent(output)
 }
