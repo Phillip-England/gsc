@@ -1,7 +1,6 @@
 package gsc
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -85,7 +84,6 @@ func (c Component) ExtractChild(selector string) Component {
 			// is this a self closing tag?
 			if string(str[i-1]) == "/" {
 				// return the self closing tag here!
-				fmt.Println(componentStart, i)
 				return NewComponent(str[componentStart : i+1])
 			}
 		}
