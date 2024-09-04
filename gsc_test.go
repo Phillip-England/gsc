@@ -13,14 +13,16 @@ func Layout() Component {
 			Title().Text("Receipt Tracker"),
 		),
 		Body().In(
-			H1().Text("Hello, World!"),
+			H1().ID("header").Text("yuooooooo"),
 		),
 	)
 }
 
 func Test_G(t *testing.T) {
 
-	c := P().TagName()
+	c := Layout().Query("#header", func(child Component) Component {
+		return child.Class("text-xl font-bold")
+	})
 	fmt.Println(c)
 
 }
